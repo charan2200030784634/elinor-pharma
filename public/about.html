@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About Us | Elinor Pharma</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: #0d6efd;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h2 {
+  color: #fff;
+  margin: 0;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 15px;
+}
+
+/* ===== HERO ===== */
+.about-hero {
+  height: 45vh;
+  background:
+    linear-gradient(
+      to right,
+      rgba(13,110,253,0.55),
+      rgba(13,110,253,0.35)
+    ),
+    url("/images/heros.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+}
+
+.about-hero-content {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUpTitle 1.2s ease forwards;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+@keyframes slideUpTitle {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CONTENT ===== */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 30px;
+}
+
+.about-text h2 {
+  color: #0d6efd;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 18px;
+  color: #444;
+}
+
+/* ===== GLASS CARDS ===== */
+.values {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Scroll reveal base */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.9s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass effect */
+.value-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 35px 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 55px rgba(13,110,253,0.25);
+}
+
+.value-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #0d6efd;
+}
+
+.value-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 22px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>Elinor Pharma</h2>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="products.html">Products</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-content">
+    <h1 class="hero-title">About Elinor Pharma</h1>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="about-text reveal">
+    <h2>Who We Are</h2>
+
+    <p>
+      <strong>Elinor Pharmaceuticals Private Limited</strong> was established in
+      <strong>2011</strong> with a vision to empower life and well-being.
+      We are a dynamic pharmaceutical company driven by a skilled team
+      of professionals.
+    </p>
+
+    <p>
+      Our guiding motto,
+      <strong>“The height of success depends on the depth of desire,”</strong>
+      reflects our commitment to excellence, innovation, and growth.
+    </p>
+
+    <p>
+      We specialize in the <strong>manufacture and marketing of chronic
+      segment pharmaceutical products</strong>, delivering
+      <strong>quality, affordable medicines</strong> trusted worldwide.
+    </p>
+
+    <p>
+      At Elinor Pharma, we adhere to strict quality standards and continuously
+      strive to improve healthcare outcomes through safe and effective solutions.
+    </p>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values reveal">
+
+    <div class="value-card">
+      <h3>Our Mission</h3>
+      <p>
+        To deliver safe, effective, and affordable pharmaceutical products
+        that enhance quality of life.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <h3>Our Vision</h3>
+      <p>
+        To become a globally recognized pharmaceutical company through
+        innovation and excellence.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <h3>Our Values</h3>
+      <p>
+        Integrity, quality, patient safety, and continuous improvement
+        guide everything we do.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2011 Elinor Pharma. All rights reserved.
+</div>
+
+<!-- SCROLL REVEAL SCRIPT -->
+<script>
+function revealOnScroll() {
+  const reveals = document.querySelectorAll(".reveal");
+
+  reveals.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+    const revealPoint = 120;
+
+    if (elementTop < windowHeight - revealPoint) {
+      el.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "ElinorCare Plus",
+    "category": "Multivitamin & Mineral Supplement",
+    "composition": "Tablets",
+    "form": "Vijayawada",
+    "packing": "10 × 10 Tablets",
+    "description": "Description:\r\nElinorCare Plus is a balanced multivitamin and mineral supplement formulated to support overall health, immunity, and energy levels. It helps in maintaining nutritional balance and supports daily wellness.\r\n\r\nIndications:\r\n\r\nNutritional deficiencies\r\n\r\nGeneral weakness and fatigue\r\n\r\nImmune system support\r\n\r\nDosage:\r\nAs directed by the physician.",
+    "image": "1766505939531-Photos.avif"
+  },
+  {
+    "name": "ElinoPain Relief",
+    "category": "Analgesic & Anti-Inflammatory",
+    "composition": "Tablets",
+    "form": "",
+    "packing": "10 × 10 Tablets",
+    "description": "Description:\r\nElinoPain Relief is used to reduce pain and inflammation. It provides effective relief from mild to moderate pain and improves mobility.\r\n\r\nIndications:\r\n\r\nMuscle pain\r\n\r\nJoint pain\r\n\r\nHeadache and body ache\r\n\r\nDosage:\r\nAs prescribed by the healthcare professional.",
+    "image": "1766506105969-heros.png"
+  },
+  {
+    "name": "ElinorCough Syrup",
+    "category": "Cough & Cold",
+    "composition": "Syrup",
+    "form": "",
+    "packing": "100 ml Bottle",
+    "description": "Description:\r\nElinorCough Syrup helps relieve cough, throat irritation, and chest congestion. It provides soothing relief and improves breathing comfort.\r\n\r\nIndications:\r\n\r\nDry cough\r\n\r\nProductive cough\r\n\r\nThroat irritation\r\n\r\nDosage:\r\nAs directed by the physician.",
+    "image": "1766506168501-elinor.jpeg"
+  }
+]

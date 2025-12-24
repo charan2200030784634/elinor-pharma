@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Products | Elinor Pharma</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: #0d6efd;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h2 {
+      color: #fff;
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== PAGE TITLE ===== */
+    .page-title {
+      text-align: center;
+      margin: 40px 0 10px;
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    /* ===== PRODUCTS GRID ===== */
+    .products-wrapper {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 30px 60px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #eef1f5;
+    }
+
+    .info {
+      padding: 20px;
+    }
+
+    .info h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #111;
+    }
+
+    .info p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .desc {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .btn {
+      margin-top: 16px;
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #0d6efd;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background: #084298;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      border-top: 1px solid #e5e5e5;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>Elinor Pharma</h2>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="products.html">Products</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- TITLE -->
+<h1 class="page-title">Our Products</h1>
+<p class="page-subtitle">
+  High-quality pharmaceutical products manufactured with care
+</p>
+
+<!-- 🔍 SEARCH & FILTER (ADDED ONLY) -->
+<div class="products-wrapper">
+  <div style="display:flex; gap:15px; margin-bottom:30px; flex-wrap:wrap;">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search product name..."
+      style="flex:1; padding:12px; border-radius:8px; border:1px solid #ccc;"
+    >
+
+    <select
+      id="categoryFilter"
+      style="padding:12px; border-radius:8px; border:1px solid #ccc; min-width:200px;"
+    >
+      <option value="">All Categories</option>
+    </select>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products-wrapper">
+  <div class="products" id="productList"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2011 Elinor Pharma. All rights reserved.
+</div>
+
+<!-- SCRIPT -->
+<script>
+let allProducts = [];
+
+fetch("/api/products")
+  .then(res => res.json())
+  .then(products => {
+    allProducts = products;
+    renderProducts(products);
+    populateCategories(products);
+  });
+
+function renderProducts(products) {
+  const list = document.getElementById("productList");
+  list.innerHTML = "";
+
+  products.forEach((p, index) => {
+    const shortDesc = p.description
+      ? p.description.substring(0, 90) + "..."
+      : "No description available";
+
+    list.innerHTML += `
+      <div class="card">
+        <img src="/uploads/${p.image}">
+        <div class="info">
+          <h3>${p.name}</h3>
+          <p><b>Category:</b> ${p.category}</p>
+          <p><b>Form:</b> ${p.form}</p>
+          <p class="desc">${shortDesc}</p>
+          <a class="btn" href="product-details.html?id=${index}">
+            View Product Details
+          </a>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* Populate category dropdown */
+function populateCategories(products) {
+  const select = document.getElementById("categoryFilter");
+  const categories = [...new Set(products.map(p => p.category))];
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    select.appendChild(option);
+  });
+}
+
+/* Search & Filter logic */
+document.getElementById("searchInput").addEventListener("input", filterProducts);
+document.getElementById("categoryFilter").addEventListener("change", filterProducts);
+
+function filterProducts() {
+  const searchText = document.getElementById("searchInput").value.toLowerCase();
+  const selectedCategory = document.getElementById("categoryFilter").value;
+
+  const filtered = allProducts.filter(p => {
+    const nameMatch = p.name.toLowerCase().includes(searchText);
+    const categoryMatch = !selectedCategory || p.category === selectedCategory;
+    return nameMatch && categoryMatch;
+  });
+
+  renderProducts(filtered);
+}
+</script>
+
+</body>
+</html>
