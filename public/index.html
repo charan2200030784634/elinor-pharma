@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elinor Pharma</title>
 
 <style>
@@ -18,23 +19,29 @@ body {
 /* ===== NAVBAR ===== */
 .navbar {
   background: #0d6efd;
-  padding: 16px 40px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .navbar h2 {
   color: #fff;
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: 1px;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 22px;
 }
 
 .nav-links a {
   color: #fff;
   text-decoration: none;
-  margin-left: 25px;
   font-size: 15px;
 }
 
@@ -42,9 +49,17 @@ body {
   text-decoration: underline;
 }
 
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
-  height: calc(100vh - 70px);
+  height: 85vh;
   background:
     linear-gradient(
       rgba(13,110,253,0.45),
@@ -67,7 +82,7 @@ body {
 }
 
 .hero h1 {
-  font-size: 46px;
+  font-size: 44px;
   margin-bottom: 15px;
 }
 
@@ -93,6 +108,16 @@ body {
   background: #e8f0ff;
 }
 
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 18px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: #666;
+}
+
 /* ===== ANIMATION ===== */
 @keyframes fadeUp {
   from {
@@ -105,29 +130,44 @@ body {
   }
 }
 
-/* ===== FOOTER ===== */
-.footer {
-  text-align: center;
-  padding: 18px;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  font-size: 14px;
-  color: #666;
-}
-
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
-  .navbar {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #0d6efd;
     flex-direction: column;
-    gap: 10px;
+    display: none;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+  }
+
+  .hero {
+    height: 70vh;
   }
 
   .hero h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .hero p {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 </style>
@@ -136,18 +176,21 @@ body {
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
+<header class="navbar">
   <h2>Elinor Pharma</h2>
-  <div class="nav-links">
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav class="nav-links" id="navLinks">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Products</a>
     <a href="contact.html">Contact</a>
-  </div>
-</div>
+  </nav>
+</header>
 
 <!-- HERO -->
-<div class="hero">
+<section class="hero">
   <div class="hero-content">
     <h1>Welcome to Elinor Pharma</h1>
     <p>
@@ -156,12 +199,22 @@ body {
     </p>
     <a href="products.html">Explore Our Products</a>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
-<div class="footer">
+<footer class="footer">
   © 2011 Elinor Pharma. All rights reserved.
-</div>
+</footer>
+
+<!-- JS -->
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+</script>
 
 </body>
 </html>

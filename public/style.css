@@ -1,55 +1,164 @@
+/* ===== GLOBAL ===== */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
   background: #f4f6f9;
+  color: #333;
 }
 
+/* ===== NAVBAR ===== */
 .navbar {
   background: #0d6efd;
-  padding: 15px 40px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .navbar h2 {
   color: white;
   margin: 0;
+  font-size: 20px;
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  gap: 22px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  margin-left: 20px;
+  font-size: 15px;
 }
 
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hamburger (HTML already added earlier) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== HERO ===== */
 .hero {
+  min-height: 85vh;
+  background:
+    linear-gradient(
+      rgba(13,110,253,0.45),
+      rgba(13,110,253,0.55)
+    ),
+    url("/images/Photos.avif");
+  background-size: cover;
+  background-position: center;
   text-align: center;
-  padding: 100px 20px;
+  padding: 80px 20px;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero h1 {
-  font-size: 40px;
+  font-size: 42px;
+  margin-bottom: 15px;
 }
 
+.hero p {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 25px;
+}
+
+/* Button */
 .btn {
-  background: #0d6efd;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 6px;
+  background: white;
+  color: #0d6efd;
+  padding: 12px 28px;
+  border-radius: 30px;
   text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
 }
 
+.btn:hover {
+  background: #e8f0ff;
+}
+
+/* ===== PAGE CONTENT ===== */
 .page {
   max-width: 900px;
   margin: 60px auto;
-  padding: 20px;
+  padding: 25px;
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 20px;
   color: #666;
+  font-size: 14px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* ===== MOBILE FIXES ===== */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 58px;
+    left: 0;
+    width: 100%;
+    background: #0d6efd;
+    flex-direction: column;
+    text-align: center;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 14px 0;
+    font-size: 16px;
+  }
+
+  .hero {
+    min-height: 70vh;
+    padding: 60px 15px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .page {
+    margin: 40px 15px;
+    padding: 20px;
+  }
 }

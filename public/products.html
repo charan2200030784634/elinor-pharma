@@ -1,145 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Our Products | Elinor Pharma</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Products | Elinor Pharma</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #f4f6f9;
-      color: #333;
-    }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
 
-    /* ===== NAVBAR ===== */
-    .navbar {
-      background: #0d6efd;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* ================= NAVBAR ================= */
+.navbar {
+  background: #0d6efd;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .navbar h2 {
-      color: #fff;
-      margin: 0;
-      font-size: 22px;
-    }
+.navbar h2 {
+  color: #fff;
+  margin: 0;
+  font-size: 20px;
+}
 
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-size: 15px;
-      font-weight: 500;
-    }
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
 
-    .nav-links a:hover {
-      text-decoration: underline;
-    }
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+}
 
-    /* ===== PAGE TITLE ===== */
-    .page-title {
-      text-align: center;
-      margin: 40px 0 10px;
-      font-size: 32px;
-      font-weight: 600;
-    }
+/* Hamburger */
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
 
-    .page-subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 30px;
-      font-size: 16px;
-    }
+/* ================= PAGE HEADER ================= */
+.page-title {
+  text-align: center;
+  margin: 35px 0 8px;
+  font-size: 32px;
+  font-weight: 600;
+}
 
-    /* ===== PRODUCTS GRID ===== */
-    .products-wrapper {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 30px 60px;
-    }
+.page-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 30px;
-    }
+/* ================= SEARCH ================= */
+.products-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px 50px;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+.search-box {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    }
+.search-box input,
+.search-box select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  flex: 1;
+}
 
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      background: #eef1f5;
-    }
+/* ================= GRID ================= */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 26px;
+}
 
-    .info {
-      padding: 20px;
-    }
+.card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
+}
 
-    .info h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #111;
-    }
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+}
 
-    .info p {
-      margin: 6px 0;
-      font-size: 14px;
-      color: #555;
-    }
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #eef1f5;
+}
 
-    .desc {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #777;
-    }
+.info {
+  padding: 18px;
+}
 
-    .btn {
-      margin-top: 16px;
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #0d6efd;
-      color: white;
-      border-radius: 8px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-    }
+.info h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
 
-    .btn:hover {
-      background: #084298;
-    }
+.info p {
+  font-size: 14px;
+  margin: 6px 0;
+  color: #555;
+}
 
-    /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      background: #fff;
-      border-top: 1px solid #e5e5e5;
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+.desc {
+  font-size: 13px;
+  color: #777;
+  margin-top: 6px;
+}
+
+.btn {
+  display: block;
+  margin-top: 15px;
+  padding: 12px;
+  text-align: center;
+  background: #0d6efd;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: #084298;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-top: 1px solid #e5e5e5;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .page-title {
+    font-size: 26px;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .card img {
+    height: 170px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -147,7 +209,10 @@
 <!-- NAVBAR -->
 <div class="navbar">
   <h2>Elinor Pharma</h2>
-  <div class="nav-links">
+
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+  <div class="nav-links" id="navLinks">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Products</a>
@@ -155,43 +220,31 @@
   </div>
 </div>
 
-<!-- TITLE -->
 <h1 class="page-title">Our Products</h1>
 <p class="page-subtitle">
   High-quality pharmaceutical products manufactured with care
 </p>
 
-<!-- 🔍 SEARCH & FILTER (ADDED ONLY) -->
 <div class="products-wrapper">
-  <div style="display:flex; gap:15px; margin-bottom:30px; flex-wrap:wrap;">
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search product name..."
-      style="flex:1; padding:12px; border-radius:8px; border:1px solid #ccc;"
-    >
-
-    <select
-      id="categoryFilter"
-      style="padding:12px; border-radius:8px; border:1px solid #ccc; min-width:200px;"
-    >
+  <div class="search-box">
+    <input id="searchInput" placeholder="Search product name..." />
+    <select id="categoryFilter">
       <option value="">All Categories</option>
     </select>
   </div>
-</div>
 
-<!-- PRODUCTS -->
-<div class="products-wrapper">
   <div class="products" id="productList"></div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   © 2011 Elinor Pharma. All rights reserved.
 </div>
 
-<!-- SCRIPT -->
 <script>
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
 let allProducts = [];
 
 fetch("/api/products")
@@ -228,7 +281,6 @@ function renderProducts(products) {
   });
 }
 
-/* Populate category dropdown */
 function populateCategories(products) {
   const select = document.getElementById("categoryFilter");
   const categories = [...new Set(products.map(p => p.category))];
@@ -241,19 +293,17 @@ function populateCategories(products) {
   });
 }
 
-/* Search & Filter logic */
 document.getElementById("searchInput").addEventListener("input", filterProducts);
 document.getElementById("categoryFilter").addEventListener("change", filterProducts);
 
 function filterProducts() {
-  const searchText = document.getElementById("searchInput").value.toLowerCase();
-  const selectedCategory = document.getElementById("categoryFilter").value;
+  const text = document.getElementById("searchInput").value.toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
 
-  const filtered = allProducts.filter(p => {
-    const nameMatch = p.name.toLowerCase().includes(searchText);
-    const categoryMatch = !selectedCategory || p.category === selectedCategory;
-    return nameMatch && categoryMatch;
-  });
+  const filtered = allProducts.filter(p =>
+    p.name.toLowerCase().includes(text) &&
+    (!category || p.category === category)
+  );
 
   renderProducts(filtered);
 }

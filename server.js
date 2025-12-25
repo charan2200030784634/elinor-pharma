@@ -5,19 +5,19 @@ const multer = require("multer");
 
 const app = express();
 
-// ===== MIDDLEWARE =====
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
+// Static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
-// ===== FILE PATHS =====
+// Files
 const ADMIN_FILE = path.join(__dirname, "admin.json");
 const PRODUCTS_FILE = path.join(__dirname, "products.json");
 
-// ===== CREATE FILES IF NOT EXISTS =====
+// Create admin.json if missing
 if (!fs.existsSync(ADMIN_FILE)) {
   fs.writeFileSync(
     ADMIN_FILE,
@@ -25,39 +25,39 @@ if (!fs.existsSync(ADMIN_FILE)) {
   );
 }
 
+// Create products.json if missing
 if (!fs.existsSync(PRODUCTS_FILE)) {
   fs.writeFileSync(PRODUCTS_FILE, "[]");
 }
 
-// Ensure uploads folder exists
+// Upload folder
 const uploadDir = path.join(__dirname, "public/uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// ===== IMAGE UPLOAD (MULTER) =====
+// Multer
 const storage = multer.diskStorage({
   destination: uploadDir,
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   }
 });
-
 const upload = multer({ storage });
 
-// ===== LOGIN =====
+/* ================= LOGIN ================= */
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   const admin = JSON.parse(fs.readFileSync(ADMIN_FILE));
 
   if (username === admin.username && password === admin.password) {
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
+    return res.json({ success: true });
   }
+
+  res.json({ success: false });
 });
 
-// ===== PRODUCTS API =====
+/* ================= PRODUCTS ================= */
 app.get("/api/products", (req, res) => {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
   res.json(products);
@@ -80,20 +80,20 @@ app.post("/add-product", upload.single("image"), (req, res) => {
   res.json({ success: true });
 });
 
-app.delete("/delete-product/:i", (req, res) => {
+app.delete("/delete-product/:index", (req, res) => {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
-  products.splice(req.params.i, 1);
+  products.splice(req.params.index, 1);
   fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
   res.json({ success: true });
 });
 
-// ===== HOME ROUTE =====
+// Home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-// ===== START SERVER (DEPLOY SAFE) =====
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log("Server running on port " + PORT);
 });
