@@ -1,191 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Product Details | Elinor Pharma</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Product Details | Elinor Pharma</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: #f4f6f9;
-      color: #333;
-    }
+body {
+  margin: 0;
+  background: #f4f6f9;
+  color: #333;
+}
 
-    /* NAVBAR */
-    .navbar {
-      background: #0d6efd;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* ================= NAVBAR ================= */
+.navbar {
+  background: #0d6efd;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
 
-    .navbar h2 {
-      color: #fff;
-      margin: 0;
-      font-size: 22px;
-    }
+.navbar h2 {
+  color: #fff;
+  margin: 0;
+  font-size: 22px;
+}
 
-    .navbar a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-size: 15px;
-      font-weight: 500;
-    }
+/* menu */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
 
-    .navbar a:hover {
-      text-decoration: underline;
-    }
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
 
-    /* CONTAINER */
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 25px;
-    }
+.nav-links a:hover {
+  text-decoration: underline;
+}
 
-    .product-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      padding: 35px;
-    }
+/* hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
 
-    .product {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 40px;
-    }
+/* ================= CONTENT ================= */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
 
-    /* IMAGE */
-    .product img {
-      width: 100%;
-      height: 420px;
-      object-fit: contain;
-      background: #f1f3f6;
-      border-radius: 14px;
-      padding: 15px;
-    }
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
 
-    /* INFO */
-    .info h1 {
-      margin-top: 0;
-      font-size: 34px;
-      color: #111;
-    }
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+}
 
-    .tags {
-      margin: 15px 0;
-      font-size: 15px;
-    }
+/* IMAGE */
+.product img {
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  background: #f1f3f6;
+  border-radius: 14px;
+  padding: 12px;
+}
 
-    .tags p {
-      margin: 8px 0;
-      color: #555;
-    }
+/* INFO */
+.info h1 {
+  margin-top: 0;
+  font-size: 32px;
+}
 
-    .tags span {
-      font-weight: 600;
-      color: #222;
-    }
+.tags p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #555;
+}
 
-    /* DESCRIPTION */
-    .about {
-      margin-top: 25px;
-      background: #f8f9fc;
-      padding: 22px;
-      border-radius: 12px;
-      border-left: 4px solid #0d6efd;
-    }
+.tags span {
+  font-weight: 600;
+  color: #222;
+}
 
-    .about h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
+/* DESCRIPTION */
+.about {
+  margin-top: 25px;
+  background: #f8f9fc;
+  padding: 20px;
+  border-left: 4px solid #0d6efd;
+  border-radius: 10px;
+}
 
-    .about p {
-      line-height: 1.7;
-      font-size: 15px;
-      color: #555;
-    }
+.about h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
 
-    /* BUTTONS */
-    .actions {
-      margin-top: 25px;
-    }
+.about p {
+  line-height: 1.6;
+  font-size: 15px;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 12px 22px;
-      background: #0d6efd;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-right: 10px;
-    }
+/* BUTTON */
+.actions {
+  margin-top: 25px;
+}
 
-    .btn.secondary {
-      background: #6c757d;
-    }
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #0d6efd;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+.btn.secondary {
+  background: #6c757d;
+}
 
-    /* FOOTER */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      background: #fff;
-      border-top: 1px solid #e5e5e5;
-      margin-top: 60px;
-      font-size: 14px;
-      color: #666;
-    }
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 50px;
+  font-size: 14px;
+  color: #666;
+}
 
-    /* MOBILE */
-    @media (max-width: 900px) {
-      .product {
-        grid-template-columns: 1fr;
-      }
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .product {
+    grid-template-columns: 1fr;
+  }
 
-      .product img {
-        height: 300px;
-      }
-    }
-  </style>
+  .product img {
+    height: 300px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #0d6efd;
+    flex-direction: column;
+    display: none;
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
+<header class="navbar">
   <h2>Elinor Pharma</h2>
-  <div>
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav class="nav-links" id="navLinks">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Products</a>
     <a href="contact.html">Contact</a>
-  </div>
-</div>
+  </nav>
+</header>
 
-<!-- CONTENT -->
+<!-- PRODUCT -->
 <div class="container">
   <div class="product-card">
     <div class="product">
 
-      <!-- IMAGE -->
-      <img id="img">
+      <img id="img" alt="Product Image">
 
-      <!-- INFO -->
       <div class="info">
         <h1 id="name"></h1>
 
@@ -216,22 +245,40 @@
 </div>
 
 <script>
+/* MOBILE MENU */
+document.getElementById("menuToggle").onclick = () => {
+  document.getElementById("navLinks").classList.toggle("active");
+};
+
+/* LOAD PRODUCT BY ID */
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const productId = params.get("id");
 
 fetch("/api/products")
   .then(res => res.json())
   .then(products => {
-    const p = products[id];
 
-    document.getElementById("img").src = "/uploads/" + p.image;
-    document.getElementById("name").innerText = p.name;
-    document.getElementById("category").innerText = p.category;
-    document.getElementById("composition").innerText = p.composition;
-    document.getElementById("form").innerText = p.form;
-    document.getElementById("packing").innerText = p.packing;
+    // ✅ FIND PRODUCT BY ID (NOT ARRAY INDEX)
+    const product = products.find(p => String(p.id) === String(productId));
+
+    if (!product) {
+      alert("Product not found");
+      window.location.href = "products.html";
+      return;
+    }
+
+    document.getElementById("img").src = "/uploads/" + product.image;
+    document.getElementById("name").innerText = product.name;
+    document.getElementById("category").innerText = product.category || "-";
+    document.getElementById("composition").innerText = product.composition || "-";
+    document.getElementById("form").innerText = product.form || "-";
+    document.getElementById("packing").innerText = product.packing || "-";
     document.getElementById("description").innerText =
-      p.description || "No description available.";
+      product.description || "No description available.";
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Failed to load product");
   });
 </script>
 

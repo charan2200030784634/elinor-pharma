@@ -8,36 +8,89 @@
 <style>
 * {
   box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f9;
 }
 
-/* ===== NAVBAR ===== */
+/* ================= NAVBAR ================= */
 .navbar {
   background: #0d6efd;
-  padding: 16px 40px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
 
 .navbar h2 {
-  color: #fff;
+  color: white;
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
+}
+
+/* Desktop links */
+.nav-links {
+  display: flex;
+  gap: 22px;
 }
 
 .nav-links a {
-  color: #fff;
+  color: white;
   text-decoration: none;
-  margin-left: 25px;
   font-size: 15px;
 }
 
-/* ===== BACKGROUND ===== */
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== MOBILE MENU OVERLAY ===== */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: #0d6efd;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    z-index: 999;
+  }
+
+  .nav-links a {
+    font-size: 22px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+/* ================= CONTACT SECTION ================= */
 .contact-bg {
   min-height: calc(100vh - 70px);
   background:
@@ -51,7 +104,6 @@ body {
   padding: 40px 20px;
 }
 
-/* ===== GLASS CARD ===== */
 .contact-card {
   max-width: 760px;
   width: 100%;
@@ -59,10 +111,8 @@ body {
   border-radius: 20px;
   background: rgba(15, 40, 90, 0.65);
   backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  color: white;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  color: #ffffff;
-
   animation: fadeSlide 1s ease forwards;
 }
 
@@ -77,43 +127,9 @@ body {
   }
 }
 
-/* ===== TEXT ANIMATIONS ===== */
-.contact-card h1,
-.contact-card h3,
-.contact-details p {
-  opacity: 0;
-  animation: slideIn 0.8s ease forwards;
-}
-
-.contact-card h1 {
-  animation-delay: 0.3s;
-}
-
-.contact-card h3 {
-  animation-delay: 0.5s;
-}
-
-.contact-details p:nth-child(1) { animation-delay: 0.7s; }
-.contact-details p:nth-child(3) { animation-delay: 0.9s; }
-.contact-details p:nth-child(4) { animation-delay: 1.1s; }
-.contact-details p:nth-child(5) { animation-delay: 1.3s; }
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* ===== TEXT STYLES ===== */
 .contact-card h1 {
   font-size: 36px;
   margin-bottom: 20px;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
 }
 
 .contact-card h3 {
@@ -126,21 +142,19 @@ body {
   font-size: 16px;
   line-height: 1.9;
   margin: 10px 0;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 .contact-details strong {
   color: #e7f0ff;
 }
 
-/* Divider */
 .divider {
   height: 1px;
   background: rgba(255,255,255,0.35);
   margin: 26px 0;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE TEXT */
 @media (max-width: 768px) {
   .contact-card {
     padding: 35px 25px;
@@ -156,17 +170,22 @@ body {
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
+<header class="navbar">
   <h2>Elinor Pharma</h2>
-  <div class="nav-links">
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav class="nav-links" id="navLinks">
+    <span class="close-btn" id="closeMenu">×</span>
+
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Products</a>
     <a href="contact.html">Contact</a>
-  </div>
-</div>
+  </nav>
+</header>
 
-<!-- CONTACT -->
+<!-- CONTACT SECTION -->
 <section class="contact-bg">
   <div class="contact-card">
 
@@ -191,6 +210,15 @@ body {
 
   </div>
 </section>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+const closeMenu = document.getElementById("closeMenu");
+
+menuToggle.onclick = () => navLinks.classList.add("active");
+closeMenu.onclick = () => navLinks.classList.remove("active");
+</script>
 
 </body>
 </html>

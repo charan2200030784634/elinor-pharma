@@ -2,52 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>About Us | Elinor Pharma</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Elinor Pharma</title>
 
 <style>
-/* ===== RESET ===== */
 * {
   box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
   background: #f4f6f9;
   color: #333;
 }
 
-/* ===== NAVBAR ===== */
+/* ================= NAVBAR ================= */
 .navbar {
   background: #0d6efd;
-  padding: 16px 40px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
 
 .navbar h2 {
-  color: #fff;
+  color: white;
   margin: 0;
+  font-size: 20px;
+}
+
+/* Desktop links */
+.nav-links {
+  display: flex;
+  gap: 22px;
 }
 
 .nav-links a {
-  color: #fff;
+  color: white;
   text-decoration: none;
-  margin-left: 25px;
   font-size: 15px;
 }
 
-/* ===== HERO ===== */
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== MOBILE FULL SCREEN MENU ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: #0d6efd;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 22px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+/* ================= HERO ================= */
 .about-hero {
   height: 45vh;
   background:
-    linear-gradient(
-      to right,
-      rgba(13,110,253,0.55),
-      rgba(13,110,253,0.35)
-    ),
+    linear-gradient(rgba(13,110,253,0.6), rgba(13,110,253,0.6)),
     url("/images/heros.png");
   background-size: cover;
   background-position: center;
@@ -61,36 +108,24 @@ body {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  width: 100%;
 }
 
-.hero-title {
-  font-size: 40px;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideUpTitle 1.2s ease forwards;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+.about-hero h1 {
+  font-size: 42px;
+  margin: 0;
 }
 
-@keyframes slideUpTitle {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== CONTENT ===== */
+/* ================= CONTENT ================= */
 .container {
   max-width: 1200px;
   margin: auto;
-  padding: 60px 30px;
+  padding: 60px 25px;
 }
 
 .about-text h2 {
   color: #0d6efd;
   font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .about-text p {
@@ -100,19 +135,18 @@ body {
   color: #444;
 }
 
-/* ===== GLASS CARDS ===== */
+/* ===== VALUES ===== */
 .values {
-  margin-top: 80px;
+  margin-top: 70px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
-/* Scroll reveal base */
 .reveal {
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.9s ease;
+  transform: translateY(40px);
+  transition: 0.8s ease;
 }
 
 .reveal.active {
@@ -120,27 +154,24 @@ body {
   transform: translateY(0);
 }
 
-/* Glass effect */
 .value-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.9);
   border-radius: 18px;
-  padding: 35px 30px;
+  padding: 35px 28px;
   text-align: center;
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: 0.3s ease;
 }
 
 .value-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 25px 55px rgba(13,110,253,0.25);
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(13,110,253,0.25);
 }
 
 .value-card h3 {
   margin-top: 0;
-  font-size: 20px;
   color: #0d6efd;
+  font-size: 22px;
 }
 
 .value-card p {
@@ -149,20 +180,20 @@ body {
   color: #444;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer {
   text-align: center;
-  padding: 22px;
+  padding: 20px;
   background: #fff;
   border-top: 1px solid #ddd;
   font-size: 14px;
   color: #666;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 30px;
+  .about-hero h1 {
+    font-size: 28px;
   }
 }
 </style>
@@ -171,20 +202,25 @@ body {
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
+<header class="navbar">
   <h2>Elinor Pharma</h2>
-  <div class="nav-links">
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav class="nav-links" id="navLinks">
+    <span class="close-btn" id="closeMenu">×</span>
+
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Products</a>
     <a href="contact.html">Contact</a>
-  </div>
-</div>
+  </nav>
+</header>
 
 <!-- HERO -->
 <div class="about-hero">
   <div class="about-hero-content">
-    <h1 class="hero-title">About Elinor Pharma</h1>
+    <h1>About Elinor Pharma</h1>
   </div>
 </div>
 
@@ -194,77 +230,60 @@ body {
   <div class="about-text reveal">
     <h2>Who We Are</h2>
 
+    <p><strong>Elinor Pharmaceuticals Private Limited</strong> was established in 2011 with a vision to empower life and well-being.</p>
+
     <p>
-      <strong>Elinor Pharmaceuticals Private Limited</strong> was established in
-      <strong>2011</strong> with a vision to empower life and well-being.
-      We are a dynamic pharmaceutical company driven by a skilled team
-      of professionals.
+      We are a dynamic pharmaceutical company driven by skilled professionals,
+      committed to innovation, quality, and patient safety.
     </p>
 
     <p>
-      Our guiding motto,
-      <strong>“The height of success depends on the depth of desire,”</strong>
-      reflects our commitment to excellence, innovation, and growth.
+      Our guiding motto —
+      <strong>“The height of success depends on the depth of desire”</strong> —
+      reflects our dedication to excellence.
     </p>
 
     <p>
-      We specialize in the <strong>manufacture and marketing of chronic
-      segment pharmaceutical products</strong>, delivering
-      <strong>quality, affordable medicines</strong> trusted worldwide.
-    </p>
-
-    <p>
-      At Elinor Pharma, we adhere to strict quality standards and continuously
-      strive to improve healthcare outcomes through safe and effective solutions.
+      We specialize in manufacturing and marketing high-quality pharmaceutical
+      products that meet global standards.
     </p>
   </div>
 
-  <!-- VALUES -->
   <div class="values reveal">
-
     <div class="value-card">
       <h3>Our Mission</h3>
-      <p>
-        To deliver safe, effective, and affordable pharmaceutical products
-        that enhance quality of life.
-      </p>
+      <p>To deliver safe, effective, and affordable pharmaceutical products.</p>
     </div>
 
     <div class="value-card">
       <h3>Our Vision</h3>
-      <p>
-        To become a globally recognized pharmaceutical company through
-        innovation and excellence.
-      </p>
+      <p>To become a globally recognized pharmaceutical company.</p>
     </div>
 
     <div class="value-card">
       <h3>Our Values</h3>
-      <p>
-        Integrity, quality, patient safety, and continuous improvement
-        guide everything we do.
-      </p>
+      <p>Integrity, quality, patient safety, and continuous improvement.</p>
     </div>
-
   </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   © 2011 Elinor Pharma. All rights reserved.
 </div>
 
-<!-- SCROLL REVEAL SCRIPT -->
 <script>
+/* MENU TOGGLE */
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+const closeMenu = document.getElementById("closeMenu");
+
+menuToggle.onclick = () => navLinks.classList.add("active");
+closeMenu.onclick = () => navLinks.classList.remove("active");
+
+/* SCROLL REVEAL */
 function revealOnScroll() {
-  const reveals = document.querySelectorAll(".reveal");
-
-  reveals.forEach(el => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    const revealPoint = 120;
-
-    if (elementTop < windowHeight - revealPoint) {
+  document.querySelectorAll(".reveal").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 120) {
       el.classList.add("active");
     }
   });

@@ -5,19 +5,15 @@ const multer = require("multer");
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
-// Files
 const ADMIN_FILE = path.join(__dirname, "admin.json");
 const PRODUCTS_FILE = path.join(__dirname, "products.json");
 
-// Create admin.json if missing
+/* INIT FILES */
 if (!fs.existsSync(ADMIN_FILE)) {
   fs.writeFileSync(
     ADMIN_FILE,
@@ -25,18 +21,14 @@ if (!fs.existsSync(ADMIN_FILE)) {
   );
 }
 
-// Create products.json if missing
 if (!fs.existsSync(PRODUCTS_FILE)) {
   fs.writeFileSync(PRODUCTS_FILE, "[]");
 }
 
-// Upload folder
 const uploadDir = path.join(__dirname, "public/uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
-// Multer
+/* MULTER */
 const storage = multer.diskStorage({
   destination: uploadDir,
   filename: (req, file, cb) => {
@@ -45,55 +37,84 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 app.post("/login", (req, res) => {
-  const { username, password } = req.body;
   const admin = JSON.parse(fs.readFileSync(ADMIN_FILE));
-
-  if (username === admin.username && password === admin.password) {
-    return res.json({ success: true });
+  if (
+    req.body.username === admin.username &&
+    req.body.password === admin.password
+  ) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
   }
-
-  res.json({ success: false });
 });
 
-/* ================= PRODUCTS ================= */
+/* GET PRODUCTS */
 app.get("/api/products", (req, res) => {
-  const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
-  res.json(products);
+  res.json(JSON.parse(fs.readFileSync(PRODUCTS_FILE)));
 });
 
+/* ADD PRODUCT */
 app.post("/add-product", upload.single("image"), (req, res) => {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
 
-  products.push({
+  const newProduct = {
+    id: Date.now(), // ✅ UNIQUE ID
+    name: req.body.name,
+    category: req.body.category,
+    composition: req.body.composition || "",
+    form: req.body.form || "",
+    packing: req.body.packing || "",
+    description: req.body.description || "",
+    image: req.file ? req.file.filename : ""
+  };
+
+  products.push(newProduct);
+  fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
+
+  res.json({ success: true });
+});
+
+/* UPDATE PRODUCT */
+app.put("/update-product/:id", upload.single("image"), (req, res) => {
+  const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
+  const id = Number(req.params.id);
+
+  const index = products.findIndex(p => p.id === id);
+  if (index === -1) return res.status(404).json({ success: false });
+
+  products[index] = {
+    ...products[index],
     name: req.body.name,
     category: req.body.category,
     composition: req.body.composition,
     form: req.body.form,
     packing: req.body.packing,
-    description: req.body.description || "",
-    image: req.file ? req.file.filename : ""
-  });
+    description: req.body.description,
+    image: req.file ? req.file.filename : products[index].image
+  };
 
   fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
   res.json({ success: true });
 });
 
-app.delete("/delete-product/:index", (req, res) => {
-  const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
-  products.splice(req.params.index, 1);
+/* DELETE PRODUCT */
+app.delete("/delete-product/:id", (req, res) => {
+  const id = Number(req.params.id);
+  let products = JSON.parse(fs.readFileSync(PRODUCTS_FILE));
+
+  products = products.filter(p => p.id !== id);
+
   fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
   res.json({ success: true });
 });
 
-// Home
+/* HOME */
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-// Start server
+/* START */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
+app.listen(PORT, () => console.log("Server running on port", PORT));
